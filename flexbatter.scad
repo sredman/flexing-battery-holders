@@ -42,6 +42,9 @@ numberPerCompartment = 2; // [1:10]
 // The number of compartments
 numberOfCompartments = 1; // [1:20]
 
+// Whether each compartment should have labels running in the same direction (parallel) or alternate directions (series)
+alternateRowLabels = false;
+
 /* [Hidden] */
 
 // Constants
@@ -218,6 +221,11 @@ module flexbatter(
 
          // engrave battery symbol
          for(j=[0:m-1])translate([j*lc,0,0]){
+           let (rotateFactor = alternateRowLabels&& i % 2 == 1 ? 1 : 0)
+           // Flip the label around if we are on an alterante row and the setting is true
+           rotate([0, 0, 180 * rotateFactor])
+           // Assemble a union of all the "bits" of the engraving
+           union() {
             translate([w+l/2,d/4+1,wz])cube([l/5,d/4.5,4*eh],true);
             translate([w+l/2+l/10,d/4+1,wz])cube([d/7,d/10,4*eh],true);
             // engrave plus symbol
@@ -230,6 +238,7 @@ module flexbatter(
                translate([w+l/2-l/(sy>0?5:10),sy*(d/4+1),wz])
                   cube([1,d/4,4*eh],true);
                   }
+            }
          }
 
          //correction for middle separators
