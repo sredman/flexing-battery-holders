@@ -217,21 +217,21 @@ module flexbatter(
          }
 
          // engrave battery symbol
-	 for(j=[0:m-1])translate([j*lc,0,0]){
-	    translate([w+l/2,d/4+1,wz])cube([l/5,d/4.5,4*eh],true);
-	    translate([w+l/2+l/10,d/4+1,wz])cube([d/7,d/10,4*eh],true);
-	    // engrave plus symbol
-	    assign(sy=(l>12*shd)?1:-1){ // for short batteries +- on the side
-	       translate([w+l/2+l/(sy>0?5:10),sy*(d/4+1),wz]){
-	          cube([1,d/4,4*eh],true);
-	          cube([d/4,1,4*eh],true);
-               }
-	    // engrave minus symbol
-	       translate([w+l/2-l/(sy>0?5:10),sy*(d/4+1),wz])
-	          cube([1,d/4,4*eh],true);
-            }
-	 }
-   
+         for(j=[0:m-1])translate([j*lc,0,0]){
+            translate([w+l/2,d/4+1,wz])cube([l/5,d/4.5,4*eh],true);
+            translate([w+l/2+l/10,d/4+1,wz])cube([d/7,d/10,4*eh],true);
+            // engrave plus symbol
+            assign(sy=(l>12*shd)?1:-1){ // for short batteries +- on the side
+               translate([w+l/2+l/(sy>0?5:10),sy*(d/4+1),wz]){
+                  cube([1,d/4,4*eh],true);
+                  cube([d/4,1,4*eh],true);
+                     }
+            // engrave minus symbol
+               translate([w+l/2-l/(sy>0?5:10),sy*(d/4+1),wz])
+                  cube([1,d/4,4*eh],true);
+                  }
+         }
+
          //correction for middle separators
          //if(i<n-1) translate([-d,d/2+w-ws/2,-1])cube([d,ws/2+0.1,d+2]);
 	 //else translate([1,d/2+w,-0.01])cylinder(r1=ch,r2=0,h=ch);
